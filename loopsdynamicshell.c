@@ -1,4 +1,6 @@
 //PLACE YOUR INCLUDE STATEMENTS HERE
+#include <cstdlib>
+#include <ctime>
 
 int main(int argc, char **argv) {
   int i,j;
