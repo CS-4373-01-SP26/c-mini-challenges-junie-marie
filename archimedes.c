@@ -17,7 +17,7 @@ Steps:
     6. Approximate pi (low+high/2)
     7. if (2n < 100): 
         Update params: 
-            - s_in = sqrt(2-sqrt(4 * s_in^2))
+            - s_in = sqrt(2-sqrt(4 - s_in^2))
             - s_out = (2 * s_out) / sqrt(4 + s_in^2)
             - n = 2 * n
         Repeat steps 4-7
