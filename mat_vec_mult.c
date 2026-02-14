@@ -1,5 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
+/*
+TASK - Implement matrix – vector multiplication.
+
+Read in the following text file (mv.txt) which contains the matrix and vector to be multiplied. 
+Print your answer to the screen and time the computation. 
+The format of mv.txt is: line 1 contains numrows, numcols. 
+The next numrows contains the rows of the matrix, each with numcols integer values. 
+The next line contains the length of the vector. The next line contains the vector of that length.
+*/
 
 typedef struct {
     int rows;
@@ -129,7 +140,13 @@ int main() {
         return 1; // failed to read
     }
 
+    clock_t start, end;
+    double runtime;
+    start = clock();
     Vector result = matvec_mul(&mat, vec);
+    end = clock();
+    runtime = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time Elapsed: %f seconds\n", runtime);
     printf("Result of matrix-vector multiplication:\n[");
     for (int i = 0; i < result.len-1; i++)
         printf("%d, ", result.data[i]);
