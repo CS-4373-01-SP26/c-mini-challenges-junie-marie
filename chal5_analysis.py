@@ -46,7 +46,7 @@ plt.savefig("outputs/benchmark_plot.png")
 # ===========================
 # 5. Print analysis summary
 # ===========================
-print("\n=== Data Analysis Summary ===")
+print("=== Data Analysis Summary ===")
 for idx, row in df.iterrows():
     size = row['Size']
     times = {
@@ -59,6 +59,6 @@ for idx, row in df.iterrows():
     slowest = max(times, key=times.get)
     speedup = times[slowest] / times[fastest]
     
-    print(f"Size {size:.0f}: fastest = {fastest} ({times[fastest]:.6f}s), "
+    print(f"Size {size:.0f}: fastest = {fastest} ({times[fastest]:.6f}s),\n"
           f"slowest = {slowest} ({times[slowest]:.6f}s), "
-          f"speedup factor = {speedup:.2f}x")
+          f"speedup factor = {speedup:.2f}x\n")

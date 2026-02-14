@@ -12,6 +12,10 @@ Chart your results. Is there a difference in performance or behavior between sta
 Between row-major and column-major?
 */
 
+#define N 16384
+// ===== Static Array =====
+double arr_static[N][N];
+
 int main(int argc, char **argv) {
   int sizes[] = {128, 256, 512, 1024, 2048, 4096, 8192, 16384};
   int num_sizes = sizeof(sizes)/sizeof(sizes[0]);
@@ -30,20 +34,11 @@ int main(int argc, char **argv) {
     int n = sizes[idx];
     clock_t start, end;
     double sum, row_time_static, col_time_static, row_time_dyn, col_time_dyn;
-
-    // ================= Heap "Static" array =================
-    // Simulate static array using malloc (safe for large sizes)
-    double *arr_static = malloc(n*n*sizeof(double));
-    if (!arr_static) {
-        printf("Malloc failed for size %d\n", n);
-        fclose(fp);
-        return 1;
-    }
     
     // Fill static array
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        arr_static[i*n + j] = (double)rand() / RAND_MAX;
+        arr_static[i][j] = (double)rand() / RAND_MAX;
       }
     }
 
@@ -52,7 +47,7 @@ int main(int argc, char **argv) {
     sum = 0;
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        sum += arr_static[i*n + j];
+        sum += arr_static[i][j];
       }
     }
     end = clock();
@@ -63,13 +58,13 @@ int main(int argc, char **argv) {
     sum = 0;
     for (int j = 0; j < n; j++) {
       for (int i = 0; i < n; i++) {
-        sum += arr_static[i*n + j];
+        sum += arr_static[i][j];
       }
     }
     end = clock();
     col_time_static = (double)(end - start)/CLOCKS_PER_SEC;
 
-    // ===== Dynamic array =====
+    // ===== Dynamic Array =====
     double *arr_dyn = malloc(n * n * sizeof(double));
     if (!arr_dyn) {
         printf("Malloc failed for size %d\n", n);
